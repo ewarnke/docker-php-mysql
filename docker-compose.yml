@@ -1,0 +1,21 @@
+version: "3.4"
+
+services:
+    
+  db:
+    image: mysql
+    volumes:
+      - ./db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+
+  http:
+    build:
+      context: .
+      dockerfile: Dockerfile-php
+    ports:
+      - 127.0.0.1:80:80
+    volumes:
+      - ./site:/var/www/html/
+      - ./logs:/var/
+    
